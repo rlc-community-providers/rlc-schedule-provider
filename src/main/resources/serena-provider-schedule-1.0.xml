@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/util
+         http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+       default-lazy-init="true">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.serena.rlc.provider.schedule"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="order">
+            <value>1</value>
+        </property>
+    </bean>
+
+    <bean id="executionProvider" class="com.serena.rlc.provider.schedule.ScheduleExecutionProvider" scope="prototype">
+        <property name="providerName" value = "${execution_provider_name}"/>
+        <property name="providerDescription" value ="${execution_provider_description}"/>
+        <property name="dateFormat" value = "${schedule_dateFormat}"/>
+        <property name="callbackUrl" value = "${schedule_callbackUrl}"/>
+        <property name="callbackUsername" value = "${schedule_callbackUsername}"/>
+        <property name="callbackPassword" value = "${schedule_callbackPassword}"/>
+    </bean>
+
+</beans>
